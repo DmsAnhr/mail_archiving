@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Login from './pages/login/views/Login';
+
+import Home from './pages/home/views/Home';
+import Category from './pages/category/views/Category';
+import About from './pages/about/views/About'
+
+import ViewDocument from './pages/document/views/ViewDocument'
+import DocumentEditor from './pages/document/views/DocumentEditor'
+import EditorCategory from './pages/category/views/EditorCategory'
+
+import ProtectedRoute from './utils/ProtectedRoute';
+
+const App = () => {
+  const location = useLocation();
+
+  // Tentukan apakah sidebar perlu ditampilkan
+  const showSidebar = location.pathname !== '/login';
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div  className={`${showSidebar ? 'main-layout' : ''}`}>
+      {showSidebar && <Sidebar />}
+      <div className={`w-100 ${showSidebar ? 'p-4' : ''}`}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          
+          <Route element={<ProtectedRoute/>}>
 
-export default App
+          </Route>
+
+          <Route path="/" element={<Navigate to="document" replace />} /> 
+          <Route path="/document" element={<ProtectedRoute><Home /></ProtectedRoute>}/>
+          <Route path="/category" element={<ProtectedRoute><Category /></ProtectedRoute>}/>
+          <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>}/>
+
+          <Route path="/document/upload" element={<ProtectedRoute><DocumentEditor /></ProtectedRoute>}/>
+          <Route path="/document/update/:id" element={<ProtectedRoute><DocumentEditor /></ProtectedRoute>}/>
+          <Route path="/document/detail/:id" element={<ProtectedRoute><ViewDocument /></ProtectedRoute>}/>
+
+          <Route path="/category/create" element={<EditorCategory />} />
+          <Route path="/category/detail/:id" element={<EditorCategory />} />
+        </Routes>
+      </div>
+    </div>
+  );
+};
+
+export default App;
