@@ -85,7 +85,32 @@ body{
     font-weight: 500;
 }
 
+.custom-paginate .page-link{
+    padding: 6px 14px;
+    color: #526071;
+    background-color: #ffffff;
+}
 
+.custom-paginate .active span{
+    color: #ffffff;
+    background: var(--primary);
+}
+
+.custom-paginate .disabled span{
+    color: #BDBDBD;
+    background: transparent!important;
+}
+
+.custom-paginate .page-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .custom-paginate .page-item:first-of-type span,
+.custom-paginate .page-item:last-of-type span{
+    font-size: 24px;
+} */
 
 
 

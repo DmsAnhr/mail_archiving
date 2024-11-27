@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import useHome from '../hooks/useHome';
 import { formatDateTime } from '../../../utils/Constant';
 import useConfirmation from '../../../utils/useConfirmation';
+import TablePaginate from '../../../components/TablePaginate';
 
 const Home = () => {
   const {
@@ -138,6 +139,13 @@ const Home = () => {
               </select>
               <label> dari {totalData}</label>
             </div>
+            
+            <TablePaginate
+                totalPages={totalPages}
+                currentPage={page}
+                onPageChange={setPage}
+            />
+
             <div className='d-flex'>
               <button
                 className="me-2 btn border d-flex align-items-center justify-content-center"
