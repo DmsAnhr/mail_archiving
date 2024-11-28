@@ -1,7 +1,7 @@
 import axiosInstance from '../../../utils/axiosInstance';
 
 export const getCategories = async () => {
-  const response = await axiosInstance.get(`/categories`);
+  const response = await axiosInstance.get(`/categories/all`);
   return response.data.data;
 };
 

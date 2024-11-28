@@ -70,6 +70,7 @@ const useDocumentEditor = () => {
   };
 
   const handleSubmit = async () => {
+    setError(null);
     setLoading(true);
     const formData = new FormData();
     formData.append('reference_number', form.reference_number);
@@ -87,7 +88,11 @@ const useDocumentEditor = () => {
       }
       navigate('/');
     } catch (err) {
-      setError(err.message);
+      if (err.status == 400) {
+        setError("Nomor surat sudah ada");
+      }else{
+        setError(err.response.data.message);
+      }
     } finally {
       setLoading(false);
     }

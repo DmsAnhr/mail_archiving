@@ -34,9 +34,9 @@ const DocumentEditor = () => {
       {/* <h1>{isEditMode ? 'Edit Document' : 'Create Document'}</h1> */}
 
       {loading && <p>Loading...</p>}
-      {error && <p className="text-danger">{error}</p>}
+      {error && <p className=" bg-danger text-white w-fit px-2">{error}</p>}
 
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={(e) => {e.preventDefault(); handleSubmit()}}>
         <div className="row mb-3">
           <label htmlFor="reference_number" className="col-form-label col-12 col-sm-2">
             Nomor Surat
@@ -69,7 +69,7 @@ const DocumentEditor = () => {
             >
               <option disabled hidden value="">Pilih Kategori</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>{category.name}</option>
+                <option key={category.id} value={category.id} disabled={category.is_deleted == 1}>{category.name}</option>
               ))}
             </select>
           </div>
@@ -104,6 +104,7 @@ const DocumentEditor = () => {
               accept="application/pdf"
               className="form-control shadow-none"
               onChange={handleFileChange}
+              required
             />
               {isEditMode ?(
                 <div className='mt-1 d-flex'>
@@ -131,7 +132,7 @@ const DocumentEditor = () => {
         <Link to={isEditMode ? `/document/detail/${id}` : '/document'} className='btn btn-grey me-2 mt-3'>
           <i className="bi bi-chevron-double-left me-1"></i>Kembali
         </Link>
-        <Button variant="primary mt-3" onClick={handleSubmit} disabled={loading}>
+        <Button variant="primary mt-3" type='sumbit' disabled={loading}>
             <i className="bi bi-floppy2-fill me-2"></i>
             {isEditMode ? 'Simpan Perubahan' : 'Simpan'}
         </Button>

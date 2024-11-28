@@ -12,6 +12,10 @@ body{
     font-family: Montserrat;
 }
 
+.w-fit{
+    width: fit-content;
+}
+
 .fs-14p{
     font-size: 14px;
 }
