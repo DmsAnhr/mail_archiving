@@ -13,6 +13,7 @@ const useDocumentEditor = () => {
     title: '',
     file: '',
   });
+  const [oldFile, setOldFile] = useState('');
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -41,6 +42,7 @@ const useDocumentEditor = () => {
         title: response.data[0].title,
         file: response.data[0].file_path,
       });
+      setOldFile(response.data[0].file_path)
     } catch (err) {
       setError(err.message);
     } finally {
@@ -101,6 +103,7 @@ const useDocumentEditor = () => {
   return {
     form,
     categories,
+    oldFile,
     loading,
     error,
     errorFile,

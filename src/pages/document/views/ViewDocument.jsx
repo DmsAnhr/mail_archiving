@@ -71,13 +71,13 @@ const ViewDocument = () => {
               style={{ border: 'none' }}
             />
         </div>
-        <div className="d-flex mt-4 mb-5">
+        {/* <div className="d-flex mt-4 mb-5">
             <Link to={`/`} className="btn btn-secondary me-3"><i className="bi bi-chevron-double-left me-2"></i>Kembali</Link>
             <Button variant="success me-3" onClick={handleDownload}>
                 <i className="bi bi-download me-2"></i>Unduh Surat
             </Button>
             <Link to={`/document/update/${id}`} className="btn btn-warning"><i className="bi bi-pencil-square me-2"></i>Edit / Ganti file</Link>
-        </div>
+        </div> */}
     </div>
   );
 };

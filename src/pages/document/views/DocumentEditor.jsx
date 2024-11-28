@@ -8,11 +8,12 @@ const DocumentEditor = () => {
   const { id } = useParams();
   const {
     form,
+    categories,
+    oldFile,
     loading,
     error,
     errorFile,
     isEditMode,
-    categories,
     handleChange,
     handleFileChange,
     handleSubmit,
@@ -107,10 +108,10 @@ const DocumentEditor = () => {
               {isEditMode ?(
                 <div className='mt-1 d-flex'>
                   <span className='fs-14p'>
-                    File saat ini : {form.file.split('/').pop()}
+                    File saat ini : {oldFile.split('/').pop()}
                   </span>
                   <a 
-                    href={`${MEDIA_URL}${form.file}`}
+                    href={`${MEDIA_URL}${oldFile}`}
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="ms-2 fs-14p"

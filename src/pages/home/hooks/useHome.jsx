@@ -50,13 +50,11 @@ const useHome = () => {
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this document?')) {
-      try {
-        await deleteDocument(id);
-        fetchData(); // Refresh data after deletion
-      } catch (err) {
-        setError(err.message);
-      }
+    try {
+      await deleteDocument(id);
+      fetchData();
+    } catch (err) {
+      setError(err.message);
     }
   };
 
